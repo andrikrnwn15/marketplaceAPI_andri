@@ -1,0 +1,241 @@
+{
+  "info": {
+    "name": "Pasar Online - REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost/marketplace/api"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. GET semua produk",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/produk.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "produk.php"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2. GET detail produk (id=1)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/produk.php?id=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "produk.php"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. GET produk tidak ditemukan (id=999) -> 404",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/produk.php?id=999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "produk.php"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "999"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "4. GET cari produk (q=batik)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/produk.php?q=batik",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "produk.php"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "batik"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "5. GET semua kategori",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/kategori.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "kategori.php"
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. POST buat pesanan -> 201",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/pesanan.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "pesanan.php"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"Budi Santoso\",\n  \"email\": \"budi@contoh.com\",\n  \"telepon\": \"081234500000\",\n  \"alamat\": \"Jl. Kampus No. 1, Bengkulu\",\n  \"items\": [\n    {\n      \"id_produk\": 1,\n      \"jumlah\": 2\n    },\n    {\n      \"id_produk\": 3,\n      \"jumlah\": 1\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "7. POST stok tidak cukup -> 422",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/pesanan.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "pesanan.php"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"Budi Santoso\",\n  \"telepon\": \"081234500000\",\n  \"alamat\": \"Jl. Kampus No. 1\",\n  \"items\": [\n    {\n      \"id_produk\": 1,\n      \"jumlah\": 99999\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "8. POST data tidak lengkap -> 422",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/pesanan.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "pesanan.php"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nama\": \"Budi Santoso\"\n}"
+        }
+      }
+    },
+    {
+      "name": "9. GET detail pesanan (id=1)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/pesanan.php?id=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "pesanan.php"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "10. GET daftar pesanan",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/pesanan.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "pesanan.php"
+          ]
+        }
+      }
+    },
+    {
+      "name": "11. DELETE tidak diizinkan -> 405",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/produk.php",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "produk.php"
+          ]
+        }
+      }
+    }
+  ]
+}

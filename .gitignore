@@ -1,0 +1,4 @@
+config/koneksi.php
+config/api_config.php
+uploads/*
+!uploads/.gitkeep
